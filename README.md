@@ -40,6 +40,12 @@ skills/
 │   └── SKILL.md
 └── pgtap-validation/     # 校验 skill
     └── SKILL.md
+
+reference/               # 参考 skill（来自 bizsky，供泛化参考）
+├── sql-sqitch/
+├── sql-test/
+├── sql-check/
+└── README.md
 ```
 
 ## 前置要求（使用这些 skills 的目标环境）
