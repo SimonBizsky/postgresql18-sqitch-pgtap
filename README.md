@@ -59,6 +59,10 @@ reference/               # 参考 skill（来自 bizsky，供泛化参考）
 
 > 本仓库只提供 skills，不含运行时环境；工具链请在目标环境自行安装。
 
+## 开发工作流
+
+本项目用 GitHub Issues（Epic → Story → Task / Bug）+ Orca 工作区看板联动管理开发计划，详见 [docs/workflow.md](./docs/workflow.md)。
+
 ## License
 
 [PostgreSQL License](./LICENSE)
