@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Editors / IDEs
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Test scratch artifacts
+test/tmp/
+
+# Keep sqitch.plan and sqitch.conf tracked (do NOT ignore them)
