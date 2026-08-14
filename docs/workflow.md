@@ -24,6 +24,21 @@ issue 号关联，形成「计划 → 执行 → 交付 → 回顾」闭环。
 
 两者通过 **issue 号** 串起来。
 
+### 状态映射（两套状态，不自动同步）
+
+issue 本身不会自动出现在看板上——必须 `orca worktree create --issue <N>` 开 worktree
+关联后，看板才出现卡片。两套状态各自独立，只有「完成」这一端会自动同步：
+
+| Orca 看板列（worktree 侧，4 态） | 含义 | GitHub issue 侧（2 态） |
+|----------------------------------|------|------------------------|
+| `todo` | 已建 worktree，未开始 | open |
+| `in-progress` | agent 执行中 | open |
+| `in-review` | PR 已建，待审核 | open |
+| `completed` | 已合并交付 | **closed**（merge 时自动关闭） |
+
+> 中间态（`in-progress` / `in-review`）只在 Orca 看板表达；GitHub issue 只有
+> open / closed，无法表达中间态。`completed` ↔ `closed` 是唯一自动同步的点。
+
 关键命令：
 
 ```bash
@@ -40,17 +55,17 @@ orca worktree show --worktree issue:<N>
 ## 完整流程（以 Task 为例）
 
 ```bash
-# 1. 计划：GitHub 网页新建 issue（选 Task 模板，自动打 task label）→ 得到 #N
-# 2. 执行：开 worktree 关联 issue 并派发 agent
+# 1. 计划：GitHub 网页新建 issue（Task 模板，自动打 task label）→ 得 #N（看板尚无卡片）
+# 2. 开 worktree 关联 issue → 看板出现卡片（todo）
 orca worktree create --issue N --base-branch main --agent pi --prompt "..."
+# 3. 派发任务 → 移 in-progress
 orca worktree set --worktree issue:N --workspace-status in-progress
-
-# 3. 交付：完成后创建 PR，关联关闭 issue
+# 4. 完成建 PR → 移 in-review，并关联关闭 issue
 gh pr create --base main --head <branch> --body "Closes #N"
-
-# 4. 回顾：review + merge 后，卡片进完成列
+orca worktree set --worktree issue:N --workspace-status in-review
+# 5. review + merge 后 → 移 completed（issue 自动 closed），清理执行现场
 orca worktree set --worktree issue:N --workspace-status completed
-orca worktree rm --worktree issue:N --force   # 清理执行现场
+orca worktree rm --worktree issue:N --force
 ```
 
 ## 层级协作节奏
