@@ -1,9 +1,11 @@
 ---
 name: Story（用户故事 / 功能需求）
 about: 以用户视角描述功能需求
-title: "Story: "
+title: "S0000 - "
 labels: ["story"]
 ---
+
+<!-- 编号规则：S{epic2位}{story2位}，如 E01 下第 2 个 story = S0102。标题格式：S0102 - <标题> -->
 
 ## 用户故事
 
@@ -20,9 +22,9 @@ labels: ["story"]
 
 ## 任务分解（Task 列表）
 
-- [ ] #<task 编号> Task: ...
-- [ ] #<task 编号> Task: ...
+- [ ] T000000 - Task: ...
+- [ ] T000000 - Task: ...
 
 ## 关联
 
-- Epic: #<编号>
+- Epic: E{NN}（#<epic issue 编号>）

@@ -1,9 +1,13 @@
 ---
 name: Task（技术任务）
 about: 可执行的技术任务，含 Item Checklist
-title: "Task: "
+title: "T000000 - "
 labels: ["task"]
 ---
+
+<!-- 编号规则：T{epic2位}{story2位}{task2位}，如 E01→S0102→第1个 task = T010201。
+     标题格式：T010201 - <标题>
+     Item 编号：T010201-01、T010201-02 ... -->
 
 ## 任务描述
 
@@ -11,8 +15,8 @@ labels: ["task"]
 
 ## Item Checklist
 
-- [ ] ...
-- [ ] ...
+- [ ] T000000-01 ...
+- [ ] T000000-02 ...
 
 ## 技术要点
 
@@ -24,4 +28,4 @@ labels: ["task"]
 
 ## 关联
 
-- Story: #<编号>
+- Story: S{NNNN}（#<story issue 编号>）

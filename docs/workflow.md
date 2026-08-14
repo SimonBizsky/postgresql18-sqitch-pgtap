@@ -5,12 +5,24 @@ issue 号关联，形成「计划 → 执行 → 交付 → 回顾」闭环。
 
 ## 分层体系
 
-| 层级 | 模板 | label | 用途 |
-|------|------|-------|------|
-| Epic | `1_epic.md` | `epic` | 业务域 / 阶段计划 |
-| Story | `2_story.md` | `story` | 用户故事 / 功能需求 |
-| Task | `3_task.md` | `task` | 技术任务（含 Item Checklist） |
-| Bug | `4_bug.md` | `bug` | 缺陷 / 故障 |
+| 层级 | 模板 | 业务编号 | label | 用途 |
+|------|------|---------|-------|------|
+| Epic | `1_epic.md` | `E01` | `epic` | 业务域 / 阶段计划 |
+| Story | `2_story.md` | `S0101` | `story` | 用户故事 / 功能需求 |
+| Task | `3_task.md` | `T010101` | `task` | 技术任务（含 Item Checklist） |
+| Bug | `4_bug.md` | — | `bug` | 缺陷 / 故障 |
+
+### 编号规则
+
+| 层级 | 格式 | 示例 | 规则 |
+|------|------|------|------|
+| Epic | `E{NN}` | `E01` | 2 位全局递增 |
+| Story | `S{NNNN}` | `S0102` | epic 2 位 + story 2 位 |
+| Task | `T{NNNNNN}` | `T010201` | epic 2 位 + story 2 位 + task 2 位 |
+| Item | `T{task}-{NN}` | `T010201-03` | task 全编号 + item 2 位 |
+
+编号放在标题最前，如 `E01 - 目标`、`S0102 - 功能`、`T010201 - 任务`。
+业务编号由人工维护（GitHub 无法自动递增），需在创建时手动填写。
 
 层级关系：**Epic → Story → Task**，通过 issue 正文里的 `#编号` 引用串联；Bug 独立，
 修复后可关联到对应 Story/Task。

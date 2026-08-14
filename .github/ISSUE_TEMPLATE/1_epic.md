@@ -1,9 +1,11 @@
 ---
 name: Epic（业务域 / 阶段计划）
 about: 大型目标或阶段计划，可拆分为多个 Story
-title: "Epic: "
+title: "E00 - "
 labels: ["epic"]
 ---
+
+<!-- 编号规则：E{NN}，2 位全局递增，如 E01、E02。标题格式：E01 - <标题> -->
 
 ## 目标
 
@@ -15,8 +17,8 @@ labels: ["epic"]
 
 ## 范围（Story 列表）
 
-- [ ] #<story 编号> Story: ...
-- [ ] #<story 编号> Story: ...
+- [ ] S0000 - Story: ...
+- [ ] S0000 - Story: ...
 
 ## 非目标（Out of Scope）
 
