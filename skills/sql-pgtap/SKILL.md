@@ -1,6 +1,6 @@
 ---
-name: pgtap-validation
-description: 使用 pgTAP 为 PostgreSQL 18 编写数据库测试，并用 pg_prove 运行校验。在编写数据库测试、校验迁移结果、把测试接入 sqitch verify 或 CI 时使用。迁移脚本编写请用 sqitch-authoring skill。
+name: sql-pgtap
+description: 使用 pgTAP 为 PostgreSQL 18 编写数据库测试，并用 pg_prove 运行校验。在编写数据库测试、校验迁移结果、把测试接入 sqitch verify 或 CI 时使用。迁移脚本编写请用 sql-sqitch skill。
 license: PostgreSQL License
 compatibility: PostgreSQL 18；pgTAP 1.x；pg_prove
 ---

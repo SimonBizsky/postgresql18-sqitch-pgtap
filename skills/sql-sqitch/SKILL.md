@@ -1,6 +1,6 @@
 ---
-name: sqitch-authoring
-description: 使用 Sqitch 为 PostgreSQL 18 编写数据库迁移脚本（deploy/revert/verify）的规范与流程。在新增或修改数据库变更、编写迁移脚本、维护 sqitch.plan、执行 deploy/revert/verify 时使用。测试校验请用 pgtap-validation skill。
+name: sql-sqitch
+description: 使用 Sqitch 为 PostgreSQL 18 编写数据库迁移脚本（deploy/revert/verify）的规范与流程。在新增或修改数据库变更、编写迁移脚本、维护 sqitch.plan、执行 deploy/revert/verify 时使用。测试脚本编制请用 sql-pgtap skill。
 license: PostgreSQL License
 compatibility: PostgreSQL 18；Sqitch 1.x；psql；git
 ---

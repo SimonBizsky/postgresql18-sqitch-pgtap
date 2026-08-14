@@ -25,6 +25,6 @@ SQL 开发 skill，作为本项目 skills 的**参考来源与泛化基础**。
 
 | 参考 Skill | 对应本项目 Skill |
 |-----------|-----------------|
-| `sql-sqitch` | `skills/sqitch-authoring`（脚本编制） |
-| `sql-test` | `skills/pgtap-validation`（校验） |
-| `sql-check` | （待补充：合规审计 skill） |
+| `sql-sqitch` | `skills/sql-sqitch`（脚本编制） |
+| `sql-test` | `skills/sql-pgtap`（测试校验） |
+| `sql-check` | `skills/sql-check`（审核） |
