@@ -9,7 +9,7 @@ issue 号关联，形成「计划 → 执行 → 交付 → 回顾」闭环。
 |------|------|---------|-------|------|
 | Epic | `1_epic.md` | `E01` | `epic` | 业务域 / 阶段计划 |
 | Story | `2_story.md` | `S0101` | `story` | 用户故事 / 功能需求（执行单元，对应一个 worktree） |
-| Bug | `4_bug.md` | — | `bug` | 缺陷 / 故障 |
+| Bug | `3_bug.md` | — | `bug` | 缺陷 / 故障 |
 
 Story 是执行单元：一个 Story 对应一个 Orca worktree。Story 内的执行步骤用两级
 Checklist 记录，不再单独建 Task issue。
