@@ -8,9 +8,11 @@ issue 号关联，形成「计划 → 执行 → 交付 → 回顾」闭环。
 | 层级 | 模板 | 业务编号 | label | 用途 |
 |------|------|---------|-------|------|
 | Epic | `1_epic.md` | `E01` | `epic` | 业务域 / 阶段计划 |
-| Story | `2_story.md` | `S0101` | `story` | 用户故事 / 功能需求 |
-| Task | `3_task.md` | `T010101` | `task` | 技术任务（含 Item Checklist） |
+| Story | `2_story.md` | `S0101` | `story` | 用户故事 / 功能需求（执行单元，对应一个 worktree） |
 | Bug | `4_bug.md` | — | `bug` | 缺陷 / 故障 |
+
+Story 是执行单元：一个 Story 对应一个 Orca worktree。Story 内的执行步骤用两级
+Checklist 记录，不再单独建 Task issue。
 
 ### 编号规则
 
@@ -18,20 +20,21 @@ issue 号关联，形成「计划 → 执行 → 交付 → 回顾」闭环。
 |------|------|------|------|
 | Epic | `E{NN}` | `E01` | 2 位全局递增 |
 | Story | `S{NNNN}` | `S0102` | epic 2 位 + story 2 位 |
-| Task | `T{NNNNNN}` | `T010201` | epic 2 位 + story 2 位 + task 2 位 |
-| Item | `T{task}-{NN}` | `T010201-03` | task 全编号 + item 2 位 |
+| 步骤（一级 Checklist） | `S{NNNN}-{NN}` | `S0102-01` | story 编号 + 步骤 2 位 |
+| 子项（二级 Checklist） | `S{NNNN}-{NNNN}` | `S0102-0101` | story 编号 + 步骤 2 位 + 子项 2 位 |
 
-编号放在标题最前，如 `E01 - 目标`、`S0102 - 功能`、`T010201 - 任务`。
+编号放在标题最前，如 `E01 - 目标`、`S0102 - 功能`。
 业务编号由人工维护（GitHub 无法自动递增），需在创建时手动填写。
 
-层级关系：**Epic → Story → Task**，通过 issue 正文里的 `#编号` 引用串联；Bug 独立，
-修复后可关联到对应 Story/Task。
+层级关系：**Epic → Story**，通过 issue 正文里的 `#编号` 引用串联；Story 过大时
+拆分为多个 Story，保持单个 Story 可在一个 worktree 内完成。Bug 独立，修复后可
+关联到对应 Story。
 
 ## 与 Orca 看板的联动
 
 | 维度 | GitHub 侧 | Orca 侧 |
 |------|----------|---------|
-| 类型（做什么） | issue label（epic/story/task/bug） | worktree 卡片关联 issue 号 |
+| 类型（做什么） | issue label（epic/story/bug） | worktree 卡片关联 issue 号 |
 | 状态（做到哪步） | open / closed（PR 关闭） | `workspace-status` 看板列：`todo` / `in-progress` / `in-review` / `completed` |
 
 两者通过 **issue 号** 串起来。
@@ -64,10 +67,10 @@ orca worktree set --worktree issue:<N> --workspace-status <id>
 orca worktree show --worktree issue:<N>
 ```
 
-## 完整流程（以 Task 为例）
+## 完整流程（以 Story 为例）
 
 ```bash
-# 1. 计划：GitHub 网页新建 issue（Task 模板，自动打 task label）→ 得 #N（看板尚无卡片）
+# 1. 计划：GitHub 网页新建 issue（Story 模板，自动打 story label）→ 得 #N（看板尚无卡片）
 # 2. 开 worktree 关联 issue → 看板出现卡片（todo）
 orca worktree create --issue N --base-branch main --agent pi --prompt "..."
 # 3. 派发任务 → 移 in-progress
@@ -83,10 +86,10 @@ orca worktree rm --worktree issue:N --force
 ## 层级协作节奏
 
 1. **建 Epic**：规划阶段，列出 Story 范围与非目标。
-2. **拆 Story**：为每个 Epic 建 Story issue，写明验收标准，`#` 引用 Epic。
-3. **拆 Task**：为每个 Story 建 Task issue，`#` 引用 Story；Task 是 Orca worktree
-   的最小执行单元，一个 Task 对应一个 worktree。
-4. **记 Bug**：发现缺陷直接开 Bug issue，修复走「Task 流程」，PR 用 `Closes #N`
+2. **拆 Story**：为每个 Epic 建 Story issue，写明验收标准 + 两级任务 Checklist，
+   `#` 引用 Epic。Story 是 Orca worktree 的最小执行单元。
+3. **Story 过大**：拆分为多个 Story，保持单个 Story 可在一个 worktree 内完成。
+4. **记 Bug**：发现缺陷直接开 Bug issue，修复走 Story 流程，PR 用 `Closes #N`
    同时关闭 Bug。
 
 ## 复用到其他项目
@@ -97,7 +100,6 @@ orca worktree rm --worktree issue:N --force
    ```bash
    gh label create epic  --color 8B5CF6 --description "Epic 业务域/阶段计划"
    gh label create story --color 3B82F6 --description "Story 用户故事/功能需求"
-   gh label create task  --color 10B981 --description "Task 技术任务"
    gh label create bug   --color EF4444 --description "Bug 缺陷/故障" --force
    ```
 
